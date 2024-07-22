@@ -1,0 +1,27 @@
+@HOST=http://localhost:3000
+
+### get all stations
+
+GET {{HOST}}/stations
+
+### create new station with pumps
+
+POST {{HOST}}/stations
+content-type: application/json
+
+{
+    "name": "TestStation 1",
+    "city": "Zurich",
+    "address": "Im Halt",
+    "longitude": 8.56,
+    "latitude": 47.3769,
+   "pumps": [{"fuelType": "BENZIN", "price": 1.99, "available": true}]
+}
+
+### remove station by id
+
+DELETE {{HOST}}/stations/MIGROL_1
+content-type: application/json
+
+
+
