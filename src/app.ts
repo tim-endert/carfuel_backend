@@ -1,16 +1,15 @@
 import express from "express";
-import { connectDb, sequelize } from "./config/database";
+import morgan from "morgan";
+import authMiddleware from "./middlewares/authMiddleware";
 import setupAssociations from "./models/associations";
 import fuelStationRoute from "./routes/fuelStationRoute";
 
 const app = express();
-
-app.use(express.json());
-
-app.use("/stations", fuelStationRoute);
-
-connectDb();
-sequelize.sync();
 setupAssociations();
+
+app.use(morgan("tiny"));
+app.use(express.static("dist"));
+
+app.use("/stations", [authMiddleware, express.json()], fuelStationRoute);
 
 export default app;

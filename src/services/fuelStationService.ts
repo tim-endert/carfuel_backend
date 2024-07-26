@@ -1,3 +1,4 @@
+import { FuelStationDTO } from "../dtos/fuelStationDTO";
 import FuelPump from "../models/fuelPump";
 import FuelStation from "../models/fuelStation";
 
@@ -10,7 +11,7 @@ class FuelStationService {
       },
     });
 
-    return fuelStations;
+    return fuelStations.map((station) => new FuelStationDTO(station));
   }
 
   static async createFuelStation(
